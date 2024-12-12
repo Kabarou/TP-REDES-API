@@ -65,7 +65,7 @@ def eliminar_premio(anio):
 
 
 
-
+"""""
 # Ejemplo de cómo llamar a las funciones
 if __name__ == "__main__":
     # Llamar a cada función según el caso que desees probar
@@ -109,3 +109,8 @@ if __name__ == "__main__":
         ]
     }
     actualizar_premios_por_categoria("chemistry", premio_actualizado_categoria)
+"""
+
+obtener_premios()
+
+# Agregar menu interactivo

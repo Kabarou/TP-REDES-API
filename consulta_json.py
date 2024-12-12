@@ -4,15 +4,15 @@ import json
 # URL del JSON
 url = "https://api.nobelprize.org/v1/prize.json"
 
-# Descargar el JSON
+# Descargamos el JSON
 response = requests.get(url)
 data = response.json()
 
-# Guardar en un archivo local
+# Guardamos en un archivo local
 with open("prizes.json", "w", encoding="utf-8") as file:
     json.dump(data, file, indent=4)
 
-# Consultar la cantidad de premios y categorías únicas
+# Consultamos la cantidad de premios y categorías únicas
 premios = data['prizes']
 print(f"Total de premios: {len(premios)}")
 
