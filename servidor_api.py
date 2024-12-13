@@ -77,7 +77,7 @@ def agregar_premio(prize: Prize):
     guardar_data(data)
     return new_prize
 
-# Actualizar un premio por año
+# Actualizar un premio por id de laureado
 @app.put("/prize/{laureate_id}", response_model=Prize)
 def actualizar_premio(laureate_id: int, prize: Prize):
     data = cargar_data()
@@ -85,11 +85,17 @@ def actualizar_premio(laureate_id: int, prize: Prize):
     
     # Buscar el premio con el laureado específico
     for p in data['prizes']:
-        for laureate in p['laureates']:
-            if laureate['id'] == laureate_id:  # Buscar por ID del laureado
-                laureate.update(prize.model_dump())  # Actualiza los datos del laureado
-                prize_found = True
-                break
+        # Verificar si la clave 'laureates' existe antes de acceder
+        if 'laureates' in p:
+            for laureate in p['laureates']:
+                if laureate['id'] == laureate_id:  # Buscar por ID del laureado
+                    # Actualizar solo el laureado específico sin anidar laureados
+                    laureate['firstname'] = prize.laureates[0].firstname
+                    laureate['surname'] = prize.laureates[0].surname
+                    laureate['motivation'] = prize.laureates[0].motivation
+                    laureate['share'] = prize.laureates[0].share
+                    prize_found = True
+                    break
         if prize_found:
             break
     
@@ -99,7 +105,7 @@ def actualizar_premio(laureate_id: int, prize: Prize):
     guardar_data(data)
     return prize
 
-# Eliminar un premio por id de laureado
+
 # Eliminar un premio por el ID del laureado
 @app.delete("/prize/laureate/{laureate_id}")
 def borrar_premio_por_laureate(laureate_id: int):
