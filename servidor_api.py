@@ -60,6 +60,14 @@ def obtener_premios_por_anio(anio: int):
         raise HTTPException(status_code=404, detail="No se encontraron premios para este año")
     return prizes
 
+@app.get("/prize/category/{category}", response_model=List[Prize])
+def obtener_premios_por_categoria(category: str):
+    data = cargar_data()
+    prizes = [prize for prize in data['prizes'] if prize['category'] == category]
+    if not prizes:
+        raise HTTPException(status_code=404, detail="No se encontraron premios para esta categoría")
+    return prizes
+
 # Agregar un nuevo premio
 @app.post("/prizes", response_model=Prize)
 def agregar_premio(prize: Prize):
@@ -70,44 +78,56 @@ def agregar_premio(prize: Prize):
     return new_prize
 
 # Actualizar un premio por año
-@app.put("/prize/{year}", response_model=Prize)
-def actualizar_premio(anio: int, prize: Prize):
+@app.put("/prize/{laureate_id}", response_model=Prize)
+def actualizar_premio(laureate_id: int, prize: Prize):
     data = cargar_data()
     prize_found = False
+    
+    # Buscar el premio con el laureado específico
     for p in data['prizes']:
-        if p['year'] == anio:
-            p.update(prize.model_dump())  # Usamos model_dump()
-            prize_found = True
+        for laureate in p['laureates']:
+            if laureate['id'] == laureate_id:  # Buscar por ID del laureado
+                laureate.update(prize.model_dump())  # Actualiza los datos del laureado
+                prize_found = True
+                break
+        if prize_found:
             break
+    
     if not prize_found:
-        raise HTTPException(status_code=404, detail="Premio no encontrado")
+        raise HTTPException(status_code=404, detail="Premio no encontrado para este laureado")
+    
     guardar_data(data)
     return prize
 
-# Actualizar todos los premios de una categoría específica
-@app.put("/prize/category/{category}", response_model=List[Prize])
-def actualizar_premios_por_categoria(category: str, prize: Prize):
+# Eliminar un premio por id de laureado
+# Eliminar un premio por el ID del laureado
+@app.delete("/prize/laureate/{laureate_id}")
+def borrar_premio_por_laureate(laureate_id: int):
     data = cargar_data()
-    updated_prizes = []
+    
+    # Buscar y eliminar el laureado dentro de los premios
     prize_found = False
     
-    # Buscar y actualizar todos los premios de la categoría
-    for p in data['prizes']:
-        if p['category'] == category:
-            p.update(prize.model_dump())  # Usamos model_dump()
-            updated_prizes.append(p)
-            prize_found = True
+    for prize in data['prizes']:
+        # Verificar si el premio tiene laureados
+        if 'laureates' in prize and prize['laureates']:
+            laureates = prize['laureates']
+            # Filtrar los laureates que no coinciden con el id
+            new_laureates = [laureate for laureate in laureates if laureate['id'] != laureate_id]
+            
+            # Si el laureado fue encontrado y eliminado, actualizamos la lista
+            if len(new_laureates) != len(laureates):
+                prize['laureates'] = new_laureates
+                prize_found = True
+                
+                # Si el premio no tiene laureados después de eliminar, eliminamos el premio
+                if not prize['laureates']:
+                    data['prizes'].remove(prize)
+                break
     
     if not prize_found:
-        raise HTTPException(status_code=404, detail="No se encontraron premios para esta categoría")
+        raise HTTPException(status_code=404, detail="No se encontró el laureado con ese ID en los premios")
     
+    # Guardar los datos después de la eliminación
     guardar_data(data)
-    return updated_prizes
-
-# Eliminar un premio por año
-@app.delete("/prize/{year}")
-def borrar_premio(anio: int):
-    data = cargar_data()
-    data['prizes'] = [prize for prize in data['prizes'] if prize['year'] != anio]
-    guardar_data(data)
-    return {"Mensaje": f"Premio del año {anio} eliminado correctamente."}
+    return {"Mensaje": f"Premio del laureado con ID {laureate_id} eliminado correctamente."}

@@ -3305,12 +3305,6 @@
             "category": "peace",
             "laureates": [
                 {
-                    "id": 564,
-                    "motivation": "\"for their work for the banning and clearing of anti-personnel mines\"",
-                    "share": 2,
-                    "firstname": "International Campaign to Ban Landmines"
-                },
-                {
                     "id": 565,
                     "firstname": "Jody",
                     "surname": "Williams",
@@ -11104,6 +11098,19 @@
             "year": 2030,
             "category": "probando",
             "laureates": []
+        },
+        {
+            "year": 2024,
+            "category": "literature",
+            "laureates": [
+                {
+                    "id": 1,
+                    "firstname": "Gabriel",
+                    "surname": "Garcia Marquez",
+                    "motivation": "Por su obra literaria, que ha elevado la literatura latinoamericana",
+                    "share": 1
+                }
+            ]
         }
     ]
 }
