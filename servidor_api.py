@@ -53,9 +53,10 @@ def obtener_premios():
 
 # Obtener premios por año
 @app.get("/prize/{year}", response_model=List[Prize])
-def obtener_premios_por_anio(anio: int):
+def obtener_premios_por_anio(year: int):  
     data = cargar_data()
-    prizes = [prize for prize in data['prizes'] if prize['year'] == anio]
+    prizes = [prize for prize in data['prizes'] if prize['year'] == year]
+    print("Premios encontrados:", prizes)  # Agregar esto para depurar
     if not prizes:
         raise HTTPException(status_code=404, detail="No se encontraron premios para este año")
     return prizes

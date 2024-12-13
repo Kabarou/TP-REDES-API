@@ -7155,13 +7155,6 @@
             "category": "medicine",
             "laureates": [
                 {
-                    "id": 367,
-                    "firstname": "Severo",
-                    "surname": "Ochoa",
-                    "motivation": "\"for their discovery of the mechanisms in the biological synthesis of ribonucleic acid and deoxyribonucleic acid\"",
-                    "share": 2
-                },
-                {
                     "id": 368,
                     "firstname": "Arthur",
                     "surname": "Kornberg",
@@ -11037,19 +11030,6 @@
         },
         {
             "year": 1901,
-            "category": "physics",
-            "laureates": [
-                {
-                    "id": 1,
-                    "firstname": "Wilhelm Conrad",
-                    "surname": "R\u00f6ntgen",
-                    "motivation": "\"in recognition of the extraordinary services he has rendered by the discovery of the remarkable rays subsequently named after him\"",
-                    "share": 1
-                }
-            ]
-        },
-        {
-            "year": 1901,
             "category": "medicine",
             "laureates": [
                 {
@@ -11090,17 +11070,20 @@
             "overallMotivation": "string"
         },
         {
-            "year": 2030,
-            "category": "probando",
-            "laureates": []
-        },
-        {
-            "year": 2030,
-            "category": "probando",
-            "laureates": []
-        },
-        {
             "year": 2024,
+            "category": "literature",
+            "laureates": [
+                {
+                    "id": 1,
+                    "firstname": "Gabriel",
+                    "surname": "Garcia Marquez",
+                    "motivation": "Por su obra literaria, que ha elevado la literatura latinoamericana",
+                    "share": 1
+                }
+            ]
+        },
+        {
+            "year": 2029,
             "category": "literature",
             "laureates": [
                 {
