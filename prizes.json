@@ -10513,19 +10513,6 @@
         },
         {
             "year": 1908,
-            "category": "physics",
-            "laureates": [
-                {
-                    "id": 12,
-                    "firstname": "Gabriel",
-                    "surname": "Lippmann",
-                    "motivation": "\"for his method of reproducing colours photographically based on the phenomenon of interference\"",
-                    "share": 1
-                }
-            ]
-        },
-        {
-            "year": 1908,
             "category": "medicine",
             "laureates": [
                 {
@@ -11088,6 +11075,19 @@
             "laureates": [
                 {
                     "id": 1,
+                    "firstname": "Gabriel",
+                    "surname": "Garcia Marquez",
+                    "motivation": "Por su obra literaria, que ha elevado la literatura latinoamericana",
+                    "share": 1
+                }
+            ]
+        },
+        {
+            "year": 0,
+            "category": "string",
+            "laureates": [
+                {
+                    "id": 12,
                     "firstname": "Gabriel",
                     "surname": "Garcia Marquez",
                     "motivation": "Por su obra literaria, que ha elevado la literatura latinoamericana",

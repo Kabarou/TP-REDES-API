@@ -44,7 +44,7 @@ def agregar_premio():
                 "firstname": input("Ingrese el primer nombre: "),
                 "surname": input("Ingrese el apellido: "),
                 "motivation": input("Ingrese la motivación: "),
-                "share": int(input("Ingrese el porcentaje de compartir el premio: "))
+                "share": int(input("Ingrese el share: "))
             }
         ]
     }
@@ -67,7 +67,7 @@ def actualizar_premio():
                 "firstname": input("Ingrese el primer nombre: "),
                 "surname": input("Ingrese el apellido: "),
                 "motivation": input("Ingrese la motivación: "),
-                "share": int(input("Ingrese el porcentaje de compartir el premio: "))
+                "share": int(input("Ingrese el share: "))
             }
         ]
     }

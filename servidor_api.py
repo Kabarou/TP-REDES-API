@@ -90,11 +90,16 @@ def actualizar_premio(laureate_id: int, prize: Prize):
         if 'laureates' in p:
             for laureate in p['laureates']:
                 if laureate['id'] == laureate_id:  # Buscar por ID del laureado
-                    # Actualizar solo el laureado específico sin anidar laureados
+                    # Actualizar solo el laureado específico
                     laureate['firstname'] = prize.laureates[0].firstname
                     laureate['surname'] = prize.laureates[0].surname
                     laureate['motivation'] = prize.laureates[0].motivation
                     laureate['share'] = prize.laureates[0].share
+
+                    # Actualizar el año del premio
+                    p['year'] = prize.year
+                    p['category'] = prize.category
+                    
                     prize_found = True
                     break
         if prize_found:
